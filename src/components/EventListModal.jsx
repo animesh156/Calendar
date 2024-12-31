@@ -39,8 +39,8 @@ const EventListModal = ({ date, events, onClose, onDeleteEvent, handleEditEvent 
 
   return (
     <div className="modal fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-4 w-96">
-        <h2 className="text-lg font-bold text-gray-700 mb-4 text-center">
+      <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-4 w-96">
+        <h2 className="text-lg font-bold dark:text-white text-gray-700 mb-4 text-center">
           Event List for {date.format("DD MMMM YYYY")}
         </h2>
 
@@ -50,7 +50,7 @@ const EventListModal = ({ date, events, onClose, onDeleteEvent, handleEditEvent 
             type="text"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            className="p-2 border-2 border-gray-300 rounded-xl w-full"
+            className="p-2 border-2 dark:border-cyan-300 border-gray-300 dark:bg-zinc-950 rounded-xl w-full"
             placeholder="Search events by keyword"
           />
         </div>
@@ -59,10 +59,10 @@ const EventListModal = ({ date, events, onClose, onDeleteEvent, handleEditEvent 
           {filteredEvents.length > 0 ? (
             <ul className="mb-4">
               {filteredEvents.map((event) => (
-                <li key={event.id} className="border-b py-2">
+                <li key={event.id} className="border-b py-2 dark:text-orange-500">
                   <div>
                     {/* Apply category color to event name */}
-                    <strong className={categoryColors[event.name] || "text-black"}>
+                    <strong className={categoryColors[event.name] || "text-black dark:text-yellow-400"}>
                       {event.name}
                     </strong>
                     <p>
@@ -88,7 +88,7 @@ const EventListModal = ({ date, events, onClose, onDeleteEvent, handleEditEvent 
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500 mb-4 text-center font-bold">No events for this day.</p>
+            <p className="text-gray-500 dark:text-pink-400 mb-4 text-center font-bold">No events for this day.</p>
           )}
         </div>
 

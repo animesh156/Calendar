@@ -34,8 +34,8 @@ const EventModal = ({ date, events, onClose, onSave, onShowList }) => {
 
   return (
     <div className="modal fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-4 w-96">
-        <h2 className="text-lg font-bold text-gray-700 mb-2 text-center">
+      <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-4 w-96">
+        <h2 className="text-lg font-bold dark:text-sky-700 text-gray-700 mb-2 text-center">
            {`Event for ${date.format("DD MMMM YYYY")}`}
         </h2>
 
@@ -51,27 +51,27 @@ const EventModal = ({ date, events, onClose, onSave, onShowList }) => {
           placeholder="Event Name"
           value={eventName}
           onChange={(e) => setEventName(e.target.value)}
-          className="w-full border-2 rounded-xl px-3 py-2 mb-2 border-red-400"
+          className="w-full dark:bg-zinc-900 border-2 rounded-xl px-3 py-2 mb-2 border-red-400"
         />
         <div className="flex gap-2 mb-2">
           <input
             type="time"
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
-            className="flex-1 border-2 rounded-xl px-3 py-2 border-red-400"
+            className="flex-1 dark:bg-zinc-900 border-2 rounded-xl px-3 py-2 border-red-400"
           />
           <input
             type="time"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
-            className="flex-1 border-2 rounded-xl px-3 py-2 border-red-400"
+            className="flex-1 border-2 dark:bg-zinc-900 rounded-xl px-3 py-2 border-red-400"
           />
         </div>
         <textarea
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full border-2 rounded-xl px-3 py-2 mb-4 border-red-400"
+          className="w-full border-2 dark:bg-zinc-900 rounded-xl px-3 py-2 mb-4 border-red-400"
         ></textarea>
 
         <div className="flex justify-end gap-2">

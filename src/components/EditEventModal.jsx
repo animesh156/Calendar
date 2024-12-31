@@ -18,8 +18,8 @@ const EditEventModal = ({ event, onSave, onCancel }) => {
 
   return (
     <div className="modal fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-4 w-96">
-        <h2 className="text-lg font-bold text-gray-700 mb-4 text-center">
+      <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-4 w-96">
+        <h2 className="text-lg font-bold text-gray-700 dark:text-white mb-4 text-center">
           Edit Event
         </h2>
         
@@ -27,27 +27,27 @@ const EditEventModal = ({ event, onSave, onCancel }) => {
           type="text"
           value={updatedEvent.name}
           onChange={(e) => handleInputChange("name", e.target.value)}
-          className="mt-1 p-2 border-2 border-red-300 rounded-xl w-full mb-2"
+          className="mt-1 p-2 dark:bg-zinc-950 border-2 border-red-300 rounded-xl w-full mb-2"
           placeholder="Event Name"
         />
         <input
           type="time"
           value={updatedEvent.startTime}
           onChange={(e) => handleInputChange("startTime", e.target.value)}
-          className="mt-1 p-2 border-2 border-red-300 rounded-xl w-full mb-2"
+          className="mt-1 p-2 dark:bg-zinc-950 border-2 border-red-300 rounded-xl w-full mb-2"
           placeholder="Start Time"
         />
         <input
           type="time"
           value={updatedEvent.endTime}
           onChange={(e) => handleInputChange("endTime", e.target.value)}
-          className="mt-1 p-2 border-2 border-red-300 rounded-xl w-full mb-2"
+          className="mt-1 p-2 dark:bg-zinc-950 border-2 border-red-300 rounded-xl w-full mb-2"
           placeholder="End Time"
         />
         <textarea
           value={updatedEvent.description}
           onChange={(e) => handleInputChange("description", e.target.value)}
-          className="mt-1 p-2 border-2 border-red-300 rounded-xl w-full mb-2"
+          className="mt-1 p-2 dark:bg-zinc-950 border-2 border-red-300 rounded-xl w-full mb-2"
           placeholder="Description"
         />
         

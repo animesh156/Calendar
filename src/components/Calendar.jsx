@@ -172,20 +172,20 @@ const CalendarApp = () => {
 
   return (
     <div className="py-6 px-2">
-      <div className="max-w-5xl mx-auto border-2 border-black bg-white shadow rounded-lg p-4">
+      <div className="max-w-5xl mx-auto border-2 dark:border-cyan-300 bg-white dark:bg-zinc-900 shadow rounded-lg p-4 dark:shadow-cyan-200">
         <header className="flex justify-between items-center mb-4">
           <button
             onClick={handlePrevMonth}
-            className="bg-gray-100 px-4 py-2 rounded hover:bg-gray-300"
+            className="text-white bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
           >
             <FcPrevious size={26} />
           </button>
-          <h1 className="text-xl font-bold text-gray-700">
+          <h1 className="text-xl font-bold text-gray-700 dark:text-white">
             {currentMonth.format("MMMM YYYY")}
           </h1>
           <button
             onClick={handleNextMonth}
-            className="bg-gray-100 px-4 py-2 rounded hover:bg-gray-300"
+            className="text-white bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
           >
             <FcNext size={26} />
           </button>
@@ -193,7 +193,7 @@ const CalendarApp = () => {
 
         <div className="grid grid-cols-7 gap-2 text-center">
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-            <div key={day} className="text-sm font-bold text-gray-600">
+            <div key={day} className="text-sm font-bold text-gray-600 dark:text-white">
               {day}
             </div>
           ))}
@@ -204,18 +204,21 @@ const CalendarApp = () => {
             const isToday = date.isSame(dayjs(), "day");
             const isSelected = selectedDate && date.isSame(selectedDate, "day");
             const isCurrentMonth = date.isSame(currentMonth, "month");
+            const hasEvent = events.some((event) => dayjs(event.date).isSame(date, "day"));
 
             return (
               <div
                 key={index}
                 className={`p-2 text-center rounded-lg cursor-pointer ${
                   isToday
-                    ? "bg-blue-300 text-white"
-                    : isSelected
-                    ? "bg-green-300 text-white"
-                    : isCurrentMonth
-                    ? "bg-gray-200 text-black"
-                    : "bg-gray-100 text-gray-400"
+              ? "bg-blue-400 text-white hover:bg-blue-500"
+              : isSelected
+              ? "bg-green-300 text-green-900 hover:bg-green-400"
+              : hasEvent
+              ? "bg-red-200 text-red-800 hover:bg-red-300"
+              : isCurrentMonth
+              ? "bg-gray-200 hover:bg-gray-300 text-black"
+              : "bg-gray-100 hover:bg-gray-200 text-gray-400"
                 }`}
                 onClick={() => handleDayClick(date)}
               >
