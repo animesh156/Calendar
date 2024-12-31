@@ -13,13 +13,13 @@ const CalendarApp = () => {
   const [showEventModal, setShowEventModal] = useState(false);
   const [showListModal, setShowListModal] = useState(false);
 
-  // Load events from local storage
+  // Load events from local storage to show available events in the calendar
   useEffect(() => {
     const savedEvents = JSON.parse(localStorage.getItem("events")) || [];
     setEvents(savedEvents);
   }, []);
 
-  // Save events to local storage
+  // Save events to local storage whenever events state changes
   useEffect(() => {
     if (events.length > 0) {
       localStorage.setItem("events", JSON.stringify(events));
@@ -29,21 +29,21 @@ const CalendarApp = () => {
   const startOfMonth = currentMonth.startOf("month");
   const endOfMonth = currentMonth.endOf("month");
 
-  const handlePrevMonth = () => {
+  const handlePrevMonth = () => {   // Function to handle previous month
     setCurrentMonth(currentMonth.subtract(1, "month"));
   };
 
-  const handleNextMonth = () => {
+  const handleNextMonth = () => {   // Function to handle next month
     setCurrentMonth(currentMonth.add(1, "month"));
   };
 
-  const handleDayClick = (date) => {
+  const handleDayClick = (date) => {    // Function to handle day click
     setSelectedDate(date);
     setShowEventModal(true);
     setShowListModal(false);
   };
 
-  const handleSaveEvent = (newEvent) => {
+  const handleSaveEvent = (newEvent) => {   // Function to handle save event
     if (isOverlapping(newEvent)) {
       alert(
         "The event time overlaps with another event. Please adjust the time."
@@ -57,7 +57,7 @@ const CalendarApp = () => {
     localStorage.setItem("events", JSON.stringify(updatedEvents));
   };
 
-  const handleEditEvent = (updatedEvent) => {
+  const handleEditEvent = (updatedEvent) => {  // Function to handle edit event
     const updatedEvents = events.map((event) =>
       event.id === updatedEvent.id ? updatedEvent : event
     );
@@ -67,7 +67,7 @@ const CalendarApp = () => {
     localStorage.setItem("events", JSON.stringify(updatedEvents));
   };
 
-  const handleDeleteEvent = (eventToDelete) => {
+  const handleDeleteEvent = (eventToDelete) => {    // Function to handle delete event
     const updatedEvents = events.filter(
       (event) => event.id !== eventToDelete.id
     );
@@ -75,7 +75,7 @@ const CalendarApp = () => {
     localStorage.setItem("events", JSON.stringify(updatedEvents));
   };
 
-    // Set up interval to clear all data every 24 hours so that local storgae space don't get overflow
+    // Set up interval to clear all data every 24 hours so that local storage space don't get overflow
     useEffect(() => {
       const clearLocalStorage = () => {
         localStorage.clear();
@@ -83,7 +83,7 @@ const CalendarApp = () => {
         console.log("Local storage cleared after 24 hours");
       };
   
-      // Set interval to clear storage every 24 hours (24 * 60 * 60 * 1000 = 86,400,000 ms)
+      // Set interval to clear storage every 24 hours 
       const interval = setInterval(clearLocalStorage, 24 * 60 * 60 * 1000);
   
       // Cleanup interval on component unmount
@@ -91,17 +91,17 @@ const CalendarApp = () => {
     }, []);
   
 
-  const handleCloseModal = () => {
+  const handleCloseModal = () => {   // Function to handle close modal
     setShowEventModal(false);
     setShowListModal(false);
   };
 
-  const handleShowEventList = () => {
+  const handleShowEventList = () => {     // Function to handle show event list
     setShowEventModal(false);
     setShowListModal(true);
   };
 
-  const generateCalendarDays = () => {
+  const generateCalendarDays = () => {   // Function to generate calendar days
     const days = [];
     let currentDate = startOfMonth.startOf("week");
     while (currentDate.isBefore(endOfMonth.endOf("week"), "day")) {
@@ -111,7 +111,7 @@ const CalendarApp = () => {
     return days;
   };
 
-  // checks for overlaaping of two events
+  //function for checking for overlapping of two events
 
   const isOverlapping = (newEvent) => {
     return events.some((event) => {
@@ -171,7 +171,7 @@ const CalendarApp = () => {
   };
 
   return (
-    <div className="py-6 px-2">
+    <div className="py-6 px-2">   {/* Calendar App Component */}
       <div className="max-w-5xl mx-auto border-2 dark:border-cyan-300 bg-white dark:bg-zinc-900 shadow rounded-lg p-4 dark:shadow-cyan-200">
         <header className="flex justify-between items-center mb-4">
           <button
@@ -246,7 +246,7 @@ const CalendarApp = () => {
       </div>
 
       {showEventModal && selectedDate && (
-        <EventModal
+        <EventModal    // Event Modal Component
           date={selectedDate}
           events={events.filter((event) =>
             dayjs(event.date).isSame(selectedDate, "day")
@@ -260,7 +260,7 @@ const CalendarApp = () => {
       )}
 
       {showListModal && selectedDate && (
-        <EventListModal
+        <EventListModal   // Event List Modal Component
           date={selectedDate}
           events={events.filter((event) =>
             dayjs(event.date).isSame(selectedDate, "day")

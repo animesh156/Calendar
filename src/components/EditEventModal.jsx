@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
-const EditEventModal = ({ event, onSave, onCancel }) => {
+const EditEventModal = ({ event, onSave, onCancel }) => {    // Destructure the props
   const [updatedEvent, setUpdatedEvent] = useState({ ...event });
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field, value) => {   // Update the updatedEvent state
     setUpdatedEvent((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = () => {    // Save the updated event
     if (!updatedEvent.name || !updatedEvent.startTime || !updatedEvent.endTime) {
       alert("Please fill all required fields.");
       return;

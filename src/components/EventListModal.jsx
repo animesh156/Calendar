@@ -11,14 +11,14 @@ const EventListModal = ({ date, events, onClose, onDeleteEvent, handleEditEvent 
   const [showEditModal, setShowEditModal] = useState(false); // State to control the visibility of the Edit Event Modal
   const [currentEvent, setCurrentEvent] = useState(null); // Track the event being edited
 
-  // Define category colors
+  // Define category colors for specific events (work, personal, school)
   const categoryColors = {
     work: "text-blue-600", // Blue for Work
     personal: "text-green-600", // Green for Personal
     school: "text-rose-600", // Rose for School
   };
 
-  const handleEdit = (event) => {
+  const handleEdit = (event) => {    // Function to handle the edit event
     setCurrentEvent(event);
     setShowEditModal(true); // Show the EditEventModal
   };
@@ -28,11 +28,11 @@ const EventListModal = ({ date, events, onClose, onDeleteEvent, handleEditEvent 
     setShowEditModal(false); // Close the edit modal
   };
 
-  const handleCancelEdit = () => {
+  const handleCancelEdit = () => {    // Function to handle the cancel edit event
     setShowEditModal(false); // Close the edit modal
   };
 
-  const filteredEvents = events.filter((event) =>
+  const filteredEvents = events.filter((event) =>    // Filter events based on keyword by converting it to lowercase & checking if it includes the keyword
     event.name.toLowerCase().includes(keyword.toLowerCase()) ||
     event.description.toLowerCase().includes(keyword.toLowerCase())
   );
@@ -55,7 +55,7 @@ const EventListModal = ({ date, events, onClose, onDeleteEvent, handleEditEvent 
           />
         </div>
 
-        <div className="max-h-60 overflow-y-auto"> {/* Add max height and enable scrolling */}
+        <div className="max-h-60 overflow-y-auto"> {/* Add max height and enable scrolling for event list */}
           {filteredEvents.length > 0 ? (
             <ul className="mb-4">
               {filteredEvents.map((event) => (
@@ -74,21 +74,21 @@ const EventListModal = ({ date, events, onClose, onDeleteEvent, handleEditEvent 
                         onClick={() => handleEdit(event)}
                         className="text-blue-500 hover:text-blue-600"
                       >
-                        <MdEditSquare size={22} />
-                      </button>
+                        <MdEditSquare size={22} />     
+                      </button>     {/* Edit button */}
                       <button
                         onClick={() => onDeleteEvent(event)}
                         className="text-red-500 hover:text-red-600"
                       >
                         <AiFillDelete size={22} />
-                      </button>
+                      </button>    {/* Delete button */}
                     </div>
                   </div>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500 dark:text-pink-400 mb-4 text-center font-bold">No events for this day.</p>
+            <p className="text-gray-500 dark:text-pink-400 mb-4 text-center font-bold">No events for this day.</p>   // Display message if no events are found
           )}
         </div>
 
@@ -97,12 +97,12 @@ const EventListModal = ({ date, events, onClose, onDeleteEvent, handleEditEvent 
           className=" bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-semibold rounded-lg text-sm px-5 py-2.5 text-center"
         >
           Close
-        </button>
+        </button>   {/* Close button */}
       </div>
 
       {/* Show the EditEventModal if the user is editing an event */}
       {showEditModal && currentEvent && (
-        <EditEventModal
+        <EditEventModal    // Pass the current event, onSave, and onCancel functions to the EditEventModal which will handle the edit form
           event={currentEvent}
           onSave={handleSaveEvent}
           onCancel={handleCancelEdit}
